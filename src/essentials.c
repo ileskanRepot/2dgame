@@ -3,7 +3,10 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
+#include "camera.h"
 #include "config.h"
+
+const int INIT_TERMINAL_SIZE = 1 << 0;
 
 void init(int flags) {
   if (flags & INIT_TERMINAL_SIZE) {
@@ -11,6 +14,11 @@ void init(int flags) {
   } else {
     termSize[0] = 15;
     termSize[1] = 15;
+  }
+  {
+    backgroundColor.r = 10;
+    backgroundColor.g = 10;
+    backgroundColor.b = 10;
   }
 }
 
@@ -56,4 +64,20 @@ int terminalSize(int *outBuff) {
   outBuff[0] = sz.ws_col;
   outBuff[1] = sz.ws_row;
   return 0;
+}
+
+/**
+ * Checks if position is inside square
+ *
+ * @param ii position in Y axis
+ * @param jj position in X axis
+ * @param square the square
+
+ * @return 1 if inside 0 otherwise
+ */
+
+char isInside(int ii, int jj, struct Square square) {
+  char yy = square.y <= ii && ii < square.y + square.h;
+  char xx = square.x <= jj && jj < square.x + square.w;
+  return yy && xx;
 }

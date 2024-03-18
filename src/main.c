@@ -1,6 +1,7 @@
 #include "config.h"
 #include "essentials.h"
 #include "renderer.h"
+#include "square.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -14,15 +15,13 @@
 int main() {
   init(0);
 
-  char buff[] = "\033[32mMOI\n";
-  // if (writeOut(buff) < 0) {
-  //   return -13;
-  // }
-  // int termSize[2];
-  // terminalSize(termSize);
-  // out[6] = writeOut();
-  // printf("\n");
-  fillScreen(0xff, 0, 0xff);
+  fillScreen(255, 0, 255);
+  struct Square mySquare;
+  mySquare.x = 1;
+  mySquare.y = 2;
+  mySquare.w = 2;
+  mySquare.h = 2;
+  drawSquare(mySquare);
 
   return 0;
 }

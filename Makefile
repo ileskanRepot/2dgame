@@ -1,10 +1,13 @@
+FLAGS=-g -Wall
 CC=gcc
-CFLAGS=
-FILES=$(wildcard *.c)
-NAME=main
+INPUT=$(wildcard src/*.c)
+OUTPUT=main
 
-make: $(FILES)
-	$(CC) $(CFLAGS) $^ -o $(NAME) 
+all: $(INPUT)
+	$(CC) $(FLAGS) $(INPUT) -o $(OUTPUT)
 
-run: make
-	./$(NAME)
+run: all
+	./main
+
+valgrind: $(INPUT) all
+	valgrind -s --leak-check=full ./$(OUTPUT)

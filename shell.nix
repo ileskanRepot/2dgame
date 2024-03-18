@@ -7,5 +7,6 @@
       valgrind
       clang-tools
       man-pages
+      cmake
     ];
   }
